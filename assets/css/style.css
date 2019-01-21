@@ -1,3 +1,12 @@
-h1 {
-    color:red;
+/* User input area */
+
+#search-area {
+    text-align:center;
 }
+
+#user-input {
+    display:block;
+    margin:0 auto;
+}
+
+/* User input area */
