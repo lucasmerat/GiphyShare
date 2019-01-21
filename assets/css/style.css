@@ -9,4 +9,14 @@
     margin:0 auto;
 }
 
-/* User input area */
+/* Button area */
+#button-area {
+    width:33%;
+    height: 40px;
+    margin:0 auto;
+    background-color: orange;
+}
+
+#button{
+    
+}
