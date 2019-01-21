@@ -3,16 +3,16 @@
 //Set up API query here
 //Key: VXGe08mkPRvKJZQIFGMHmx9xiIhGYg7t
 // URL: https://api.giphy.com/v1/gifs/search?api_key=&q=&limit=10&offset=0&rating=G&lang=en
-buttonArr = ['harry potter', 'hello', 'tiger', 'evil daemon babies'];
+buttonArr = ["harry potter", "hello", "tiger", "evil daemon babies"];
 loadButtons();
-function loadButtons(){
-    $("#button-area").empty();
-    for (let i=0;i<buttonArr.length;i++) {
-        let newButton = $('<button class="button">').text(buttonArr[i])
-        newButton.attr('data-number',i)
-        $('#button-area').append(newButton);
-    }
-    console.log(buttonArr)
+function loadButtons() {
+  $("#button-area").empty();
+  for (let i = 0; i < buttonArr.length; i++) {
+    let newButton = $('<button class="button">').text(buttonArr[i]);
+    newButton.attr("data-number", i);
+    $("#button-area").append(newButton);
+  }
+  console.log(buttonArr);
 }
 
 function performCall() {
@@ -21,27 +21,39 @@ function performCall() {
     "https://api.giphy.com/v1/gifs/search?api_key=VXGe08mkPRvKJZQIFGMHmx9xiIhGYg7t&q=" +
     query +
     "&limit=10&offset=0&rating=G&lang=en";
-    buttonArr.push(query);
-    loadButtons();
+  buttonArr.push(query);
+  loadButtons();
   $.ajax({ url: queryUrl, method: "GET" }).then(giphyPull);
 }
 
 function performSearch(event) {
-  event.preventDefault($('#user-input').val());
-  console.log($('#user-input').val() === '')
-  if ($('#user-input').val() === ''){
-    alert('Enter a search to find giphys!');
-  } else{
-   performCall(); 
- }
+  event.preventDefault($("#user-input").val());
+  console.log($("#user-input").val() === "");
+  if ($("#user-input").val() === "") {
+    alert("Enter a search to find giphys!");
+  } else {
+    performCall();
+  }
 }
 
 function giphyPull(response) {
   console.log(response);
-  
+  console.log(response.data[0].images.fixed_width_still.url);
+  for (let i = 0; i < response.data.length; i++) {
+    console.log(response.data[i]);
+    let image = $();
+    $("#image-area").append(
+      "<div class=image-box><img src =" +
+        response.data[i].images.original_still.url +
+        " class=gif move=still>"
+    );
+  }
 }
+
+function stillMove() {}
 
 //JS to add API data to page dynamically here
 
 //Running functions with event listeners here
 $("#search-btn").click(performSearch);
+$(".gif").click(stillMove);

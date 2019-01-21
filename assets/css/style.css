@@ -1,4 +1,11 @@
 /* User input area */
+body {
+    background-color:#121212;
+}
+
+h1,h2,h3,h4,p,button {
+    color:white;
+}
 
 #search-area {
     text-align:center;
@@ -12,11 +19,32 @@
 /* Button area */
 #button-area {
     width:33%;
-    height: 40px;
+    height: auto;
     margin:0 auto;
     background-color: orange;
 }
 
-#button{
-    
+button {
+    background-color:#735fff;
+    border:0;
+    padding: 8.5px 16px 8.5px 16px;
+    margin: 5px;
+}
+
+/* Image area */
+#image-area{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.image-box {
+    display:inline-block;
+    margin: 15px;
+    background-color:blue;
+}
+
+.gif {
+    height:200px;
 }
