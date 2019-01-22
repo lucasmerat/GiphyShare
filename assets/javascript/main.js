@@ -47,27 +47,30 @@ function giphyPull(response) {
         response.data[i].images.original.url +
         " still=" +
         response.data[i].images.original_still.url +
-        "><div class=text><h4 class=facebook> <h4 class=twitter> <h4 class=download>"
+        "><h4 id=facebook class=social> <h4 id=twitter class=social> <h4 id=download class=social>"
     );
   }
 }
 
 function move() {
-  this.src = $(this).attr("animated");
-  $(this).siblings().children('.facebook').text('Share on Facebook')//selects the h4 and adds text
-  $(this).siblings().children('.twitter').text('Share on Twitter')//selects the h4 and adds text
-  $(this).siblings().children('.download').text('Copy download link')//selects the h4 and adds text
-
+  $(this).children('.gif').attr('src', $(this).children('.gif').attr("animated")) 
+  console.log($(this).children('.gif'))
+//Loading issue where text will pop before the image comes up
+    $(this).children().css('visibility','visible')
+    $(this).children('#facebook').text('Share on Facebook')//selects the h4 and adds text
+    $(this).children('#twitter').text('Share on Twitter')//selects the h4 and adds text
+    $(this).children('#download').text('Copy download link')//selects the h4 and adds text
 }
 
 function still() {
-  this.src = $(this).attr("still");
-  $(this).siblings().children().empty()
+    $(this).children('.gif').attr('src', $(this).children('.gif').attr("still")) 
+    $(this).children('.social').css('visibility','hidden')
+ // $(this).siblings().children().empty()
 }
 
 //JS to add API data to page dynamically here
 
 //Running functions with event listeners here
 $("#search-btn").click(performSearch);
-$(document).on("mouseover", ".gif", move);
-$(document).on("mouseout", ".gif", still);
+$(document).on("mouseenter", ".image-box", move);
+$(document).on("mouseleave", ".image-box", still);

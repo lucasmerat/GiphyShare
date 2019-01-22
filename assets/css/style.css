@@ -84,15 +84,50 @@ button {
   justify-content: space-evenly;
 }
 
-.image-box {
+.image-box{
   display: inline-block;
   position:relative;
   margin: 15px;
 }
 
+.image-box:hover > img {
+  opacity:.5
+
+}
+
 .gif {
   height: 200px;
 }
+
+.social {
+    visibility:hidden;
+    position:absolute;
+    border:3px solid white;
+    padding: 5px;
+}
+
+#facebook{
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+#twitter{
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+#download{
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%); 
+}
+
+
 
 /* Media queries */
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
