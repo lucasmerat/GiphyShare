@@ -39,6 +39,8 @@ function performSearch(event) {
 function giphyPull(response) {
   console.log(response);
   console.log(response.data[0].images.fixed_width_still.url);
+  $('#image-area').empty();
+  $("#user-input").val('');
   for (let i = 0; i < response.data.length; i++) {
     console.log(response.data[i]);
     let image = $();
@@ -50,10 +52,12 @@ function giphyPull(response) {
   }
 }
 
-function stillMove() {}
+function stillMove() {
+    //Add ability to change stills to animated
+}
 
 //JS to add API data to page dynamically here
 
 //Running functions with event listeners here
 $("#search-btn").click(performSearch);
-$(".gif").click(stillMove);
+$(".gif").click(stillMove); //Need to add functionality 

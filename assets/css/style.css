@@ -1,50 +1,86 @@
 /* User input area */
 body {
-    background-color:#121212;
+  background-color: #121212;
 }
 
-h1,h2,h3,h4,p,button {
-    color:white;
+form {
+    display:flex;
+    justify-content: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+button {
+  color: white;
+}
+
+#title-1 {
+  color: #ff575f;
+  font-family:"Helvetica Neue", helvetica, sans-serif;
+  font-weight:bolder;
+
+}
+
+#title-2 {
+    color:#00cfff;
+    font-family:"Helvetica Neue", helvetica, sans-serif;
+    font-weight:bolder;
 }
 
 #search-area {
-    text-align:center;
+  text-align: center;
 }
 
 #user-input {
-    display:block;
-    margin:0 auto;
+    display:flex;
+  margin: 0;
+  width:80%;
+  height:55px;
+  font-size:28px;
+  border:0;
+  padding-top: 5px;
+  padding-bottom: 4px;
+}
+
+#search-btn {
+    display:flex;
+    width: 58px;
+    margin:0;
+    font-size:28px;
 }
 
 /* Button area */
 #button-area {
-    width:33%;
-    height: auto;
-    margin:0 auto;
-    background-color: orange;
+  width: 85%;
+  height: auto;
+  margin: 0 auto;
+  background-color: orange;
 }
 
 button {
-    background-color:#735fff;
-    border:0;
-    padding: 8.5px 16px 8.5px 16px;
-    margin: 5px;
+  background-color: #735fff;
+  border: 0;
+  padding: 8px 16px 8px 16px;
+  margin: 5px;
 }
 
 /* Image area */
-#image-area{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+#image-area {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .image-box {
-    display:inline-block;
-    margin: 15px;
-    background-color:blue;
+  display: inline-block;
+  margin: 15px;
+  background-color: blue;
 }
 
 .gif {
-    height:200px;
+  height: 200px;
 }
