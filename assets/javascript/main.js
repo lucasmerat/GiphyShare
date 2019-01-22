@@ -51,7 +51,7 @@ function giphyPull(response) {
         response.data[i].images.original.url + //Adding animated image as arg
         " still=" +
         response.data[i].images.original_still.url + //Still image as second arg to revert off hover
-        "><h4 id=facebook class=social> <h4 id=twitter class=social> <h4 id=download class=social>" 
+        "><a id=facebook class=social href='www.facebook.com'><a id=twitter class=social href='www.twitter.com'><a id=favorite class=social href='www.lucas.com'>" 
     );
   }
 }
@@ -66,7 +66,7 @@ function move() {
         .attr("animated")
     );
     //Displaying social buttons on hover
-  $(this)
+    $(this)
     .children()
     .css("visibility", "visible");
   $(this)
@@ -76,8 +76,8 @@ function move() {
     .children("#twitter")
     .text("Share on Twitter"); //selects the h4 and adds text
   $(this)
-    .children("#download")
-    .text("Copy download link"); //selects the h4 and adds text
+    .children("#favorite")
+    .text("Save to favorites"); //selects the h4 and adds text  
 }
 //Reverts image to still and clears social buttons. Called with mouseleave event
 function still() {
@@ -92,7 +92,6 @@ function still() {
   $(this)
     .children(".social")
     .css("visibility", "hidden");
-  // $(this).siblings().children().empty()
 }
 //Event listeners
 $("#search-btn").click(performSearchClick);

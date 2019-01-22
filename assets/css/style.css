@@ -22,6 +22,7 @@ button {
 }
 
 #title {
+font-size: 4em;
   margin-top: 40px;
 }
 
@@ -55,9 +56,16 @@ button {
 
 #search-btn {
   display: flex;
+  background-color: #735fff;
   width: 58px;
   margin: 0;
   font-size: 28px;
+  padding: 8px 16px 8px 16px;
+  border:1px solid #735fff;
+}
+
+#search-btn:hover {
+    background-color:#a168f9;
 }
 
 /* Button area */
@@ -69,11 +77,12 @@ button {
   background-color: orange;
 }
 
-button {
-  background-color: #735fff;
-  border: 0;
-  padding: 8px 16px 8px 16px;
-  margin: 5px;
+
+.button {
+    background-color: #735fff;
+    border:1px solid #735fff;
+    padding: 8px 16px 8px 16px;
+    margin: 5px;
 }
 
 /* Image area */
@@ -95,15 +104,25 @@ button {
 }
 
 .gif {
-  height: 200px;
+    height:200px;
+    min-width:200px;
 }
 
 .social {
+    color:white;
+    font-size: 18px;
     visibility:hidden;
+    width:182px;
+    margin-top: 10px;
     position:absolute;
     border:3px solid white;
     padding: 5px;
     text-align:center;
+}
+
+.social:hover{
+    color:white;
+    text-decoration: none;
 }
 
 #facebook{
@@ -120,7 +139,7 @@ button {
     -ms-transform: translate(-50%, -50%);
 }
 
-#download{
+#favorite{
     top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
