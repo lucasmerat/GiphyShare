@@ -27,7 +27,7 @@ function performCall(value) {
     query +
     "&limit=10&offset=0&rating=G&lang=en";
   console.log("query is" + query);
-//Adds query value to button array, assuming the value is not already there
+  //Adds query value to button array, assuming the value is not already there
   if (buttonArr.includes(query)) {
     console.log(query + " is already in the array");
   } else {
@@ -40,18 +40,18 @@ function performCall(value) {
 function giphyPull(response) {
   console.log(response); //Display JSON
   $("#image-area").empty(); //Clear all images, each new query
-  $("#user-input").val("");//Clears user search bar
+  $("#user-input").val(""); //Clears user search bar
   for (let i = 0; i < response.data.length; i++) {
     console.log(response.data[i]);
     let image = $();
     $("#image-area").append(
       "<div class=image-box><img src =" +
-        response.data[i].images.original_still.url +
-        " class=gif animated=" +
-        response.data[i].images.original.url + //Adding animated image as arg
-        " still=" +
-        response.data[i].images.original_still.url + //Still image as second arg to revert off hover
-        "><a id=facebook class=social href='www.facebook.com'><a id=twitter class=social href='www.twitter.com'><a id=favorite class=social href='www.lucas.com'>" 
+      response.data[i].images.original_still.url +
+      " class=gif animated=" +
+      response.data[i].images.original.url + //Adding animated image as arg
+      " still=" +
+      response.data[i].images.original_still.url + //Still image as second arg to revert off hover
+        "><a id=facebook class=social target=_blank href='https://www.facebook.com'><a id=twitter class=social href='www.twitter.com'><a id=favorite class=social href='www.lucas.com'>"
     );
   }
 }
@@ -65,8 +65,8 @@ function move() {
         .children(".gif")
         .attr("animated")
     );
-    //Displaying social buttons on hover
-    $(this)
+  //Displaying social buttons on hover
+  $(this)
     .children()
     .css("visibility", "visible");
   $(this)
@@ -77,7 +77,7 @@ function move() {
     .text("Share on Twitter"); //selects the h4 and adds text
   $(this)
     .children("#favorite")
-    .text("Save to favorites"); //selects the h4 and adds text  
+    .text("Save to favorites"); //selects the h4 and adds text
 }
 //Reverts image to still and clears social buttons. Called with mouseleave event
 function still() {

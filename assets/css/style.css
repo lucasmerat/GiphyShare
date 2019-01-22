@@ -54,7 +54,7 @@ font-size: 4em;
   padding-bottom: 4px;
 }
 
-#search-btn {
+#search-btn,#favorite-btn {
   display: flex;
   background-color: #735fff;
   width: 58px;
@@ -63,6 +63,15 @@ font-size: 4em;
   padding: 8px 16px 8px 16px;
   border:1px solid #735fff;
 }
+
+#favorite-btn {
+    background-color: #ff4458;
+    border:1px solid #ff4458;
+}
+#favorite-btn:hover{
+    background-color:#fb75b8;
+}
+
 
 #search-btn:hover {
     background-color:#a168f9;
