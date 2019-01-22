@@ -11,7 +11,7 @@ function loadButtons() {
   console.log(buttonArr);
 }
 
-function performSearch(event) {
+function performSearchClick(event) {
   event.preventDefault();
   console.log($("#user-input").val() === "");
   if ($("#user-input").val() === "") {
@@ -19,6 +19,15 @@ function performSearch(event) {
   } else {
     performCall();
   }
+}
+
+function performSearchButton(event){
+    event.preventDefault();
+    let query = $(this).text();
+    let clickUrl = "https://api.giphy.com/v1/gifs/search?api_key=VXGe08mkPRvKJZQIFGMHmx9xiIhGYg7t&q=" +
+    query +
+    "&limit=10&offset=0&rating=G&lang=en";
+    $.ajax({ url: clickUrl, method: "GET" }).then(giphyPull);
 }
 
 function performCall() {
@@ -71,6 +80,7 @@ function still() {
 //JS to add API data to page dynamically here
 
 //Running functions with event listeners here
-$("#search-btn").click(performSearch);
+$("#search-btn").click(performSearchClick);
+$(document).on("click", ".button", performSearchButton);
 $(document).on("mouseenter", ".image-box", move);
 $(document).on("mouseleave", ".image-box", still);

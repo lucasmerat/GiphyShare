@@ -92,7 +92,6 @@ button {
 
 .image-box:hover > img {
   opacity:.5
-
 }
 
 .gif {
@@ -104,6 +103,7 @@ button {
     position:absolute;
     border:3px solid white;
     padding: 5px;
+    text-align:center;
 }
 
 #facebook{
