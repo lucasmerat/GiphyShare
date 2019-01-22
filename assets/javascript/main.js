@@ -17,26 +17,23 @@ function performSearchClick(event) {
   if ($("#user-input").val() === "") {
     alert("Enter a search to find giphys!");
   } else {
-    performCall();
+    performCall($("#user-input").val());
   }
 }
 
-function performSearchButton(event){
-    event.preventDefault();
-    let query = $(this).text();
-    let clickUrl = "https://api.giphy.com/v1/gifs/search?api_key=VXGe08mkPRvKJZQIFGMHmx9xiIhGYg7t&q=" +
-    query +
-    "&limit=10&offset=0&rating=G&lang=en";
-    $.ajax({ url: clickUrl, method: "GET" }).then(giphyPull);
-}
-
-function performCall() {
-  let query = $("#user-input").val();
+function performCall(value) {
+  let query = value;
   let queryUrl =
     "https://api.giphy.com/v1/gifs/search?api_key=VXGe08mkPRvKJZQIFGMHmx9xiIhGYg7t&q=" +
     query +
     "&limit=10&offset=0&rating=G&lang=en";
-  buttonArr.push(query);
+    console.log('query is'+ query)
+    //Only add button to array if it's not already there
+     if(buttonArr.includes(query)){
+        console.log(query + ' is already in the array') 
+    } else {
+        buttonArr.push(query);
+  }
   loadButtons();
   $.ajax({ url: queryUrl, method: "GET" }).then(giphyPull);
 }
@@ -81,6 +78,6 @@ function still() {
 
 //Running functions with event listeners here
 $("#search-btn").click(performSearchClick);
-$(document).on("click", ".button", performSearchButton);
+$(document).on("click", ".button", () => performCall(event.target.innerText));
 $(document).on("mouseenter", ".image-box", move);
 $(document).on("mouseleave", ".image-box", still);
