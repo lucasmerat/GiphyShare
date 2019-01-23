@@ -24,16 +24,21 @@ button {
 #title {
 font-size: 4em;
   margin-top: 40px;
+  border: 7px solid white;
+  width:500px;
+  margin:0 auto;
+  margin-top:40px;
+  padding:15px 15px 19px 15px;
 }
 
 #title-1 {
-  color: #ff575f;
+  color: white;
   font-family: "Helvetica Neue", helvetica, sans-serif;
   font-weight: bolder;
 }
 
 #title-2 {
-  color: #00cfff;
+  color: white;
   font-family: "Helvetica Neue", helvetica, sans-serif;
   font-weight: bolder;
 }
@@ -72,7 +77,6 @@ font-size: 4em;
     background-color:#fb75b8;
 }
 
-
 #search-btn:hover {
     background-color:#a168f9;
 }
@@ -92,6 +96,7 @@ font-size: 4em;
     border:1px solid #735fff;
     padding: 8px 16px 8px 16px;
     margin: 5px;
+    font-weight:bolder;
 }
 
 /* Image area */
@@ -120,8 +125,9 @@ font-size: 4em;
 .social {
     color:white;
     font-size: 18px;
+    font-weight:bold;
     visibility:hidden;
-    width:182px;
+    width:187px;
     margin-top: 10px;
     position:absolute;
     border:3px solid white;
@@ -161,5 +167,9 @@ font-size: 4em;
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
   #image-area {
     justify-content: center;
+  }
+  #title{
+      width:250px;
+      font-size:2.5em;
   }
 }

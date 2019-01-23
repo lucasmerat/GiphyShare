@@ -1,4 +1,5 @@
 buttonArr = ["OMG", "Good Morning", "LOL", "NO", "Ok", "Good"]; //Initial sample search values
+favoritesArr = [];
 loadButtons();
 //Creates and displays buttons for all in array
 function loadButtons() {
@@ -10,7 +11,7 @@ function loadButtons() {
   }
 }
 //If search bar is filled, calls the performCall function
-function performSearchClick(event) {
+function performSearch(event) {
   event.preventDefault();
   console.log($("#user-input").val() === "");
   if ($("#user-input").val() === "") {
@@ -51,9 +52,11 @@ function giphyPull(response) {
       response.data[i].images.original.url + //Adding animated image as arg
       " still=" +
       response.data[i].images.original_still.url + //Still image as second arg to revert off hover
-        "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" +//Adding link to share on Facebook
+      "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" + //Adding link to share on Facebook
         response.data[i].images.original.url +
-        "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" + response.data[i].bitly_url + "'><a id=favorite class=social href='www.lucas.com'>"
+        "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" +
+        response.data[i].bitly_url +
+        "'><a id=favorite class=social href='www.lucas.com'>"
     );
   }
 }
@@ -95,8 +98,31 @@ function still() {
     .children(".social")
     .css("visibility", "hidden");
 }
+
+function saveFavorite(event) {
+  event.preventDefault();
+  favoritesArr.push(
+    $(this)
+      .siblings(".gif")
+      .attr("src")
+  );
+  console.log(favoritesArr);
+}
+
+function displayFavorites() {
+  event.preventDefault();
+  $("#image-area").empty();
+  console.log(favoritesArr.length)
+  for (let i = 0; i < favoritesArr.length; i++) {
+      console.log(favoritesArr[i])
+    $("#image-area").append("<div class=image-box><img src=" + favoritesArr[i] + ">");
+  }
+}
+
 //Event listeners
-$("#search-btn").click(performSearchClick);
+$("#search-btn").click(performSearch);
+$("#favorite-btn").click(displayFavorites);
 $(document).on("click", ".button", () => performCall(event.target.innerText));
+$(document).on("click", "#favorite", saveFavorite);
 $(document).on("mouseenter", ".image-box", move);
 $(document).on("mouseleave", ".image-box", still);
