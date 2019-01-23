@@ -51,7 +51,9 @@ function giphyPull(response) {
       response.data[i].images.original.url + //Adding animated image as arg
       " still=" +
       response.data[i].images.original_still.url + //Still image as second arg to revert off hover
-        "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u="+ response.data[i].images.original.url + "&amp;src=sdkpreparse'><a id=twitter class=social href='www.twitter.com'><a id=favorite class=social href='www.lucas.com'>"
+        "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" +//Adding link to share on Facebook
+        response.data[i].images.original.url +
+        "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" + response.data[i].bitly_url + "'><a id=favorite class=social href='www.lucas.com'>"
     );
   }
 }
