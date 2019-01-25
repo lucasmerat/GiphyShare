@@ -161,6 +161,38 @@ font-size: 4em;
     -ms-transform: translate(-50%, -50%); 
 }
 
+.fave-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0px;
+    color: #ff2551;
+    display:inline;
+}
+
+/* Fade in animation
+
+<i class="fas fa-heart"></i>
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInDown {
+  animation-name: fadeInDown;
+}
+
+*/
+
 
 
 /* Media queries */
@@ -171,5 +203,10 @@ font-size: 4em;
   #title{
       width:250px;
       font-size:2.5em;
+  }
+
+  form , #description{
+    margin-left: 10px;
+    margin-right: 10px;
   }
 }

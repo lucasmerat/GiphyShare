@@ -56,7 +56,7 @@ function giphyPull(response) {
         response.data[i].images.original.url +
         "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" +
         response.data[i].bitly_url +
-        "'><a id=favorite class=social href='www.lucas.com'>"
+        "'><a id=favorite class=social href='www.lucas.com'></a><i class='fas fa-heart fave-icon'>"
     );
   }
 }
@@ -106,16 +106,19 @@ function saveFavorite(event) {
       .siblings(".gif")
       .attr("src")
   );
+  $(this).siblings('.fave-icon').animate({fontSize: "100px"},500, "easeInOutBounce").animate({fontSize: "0px"},500, "easeOutBounce");
   console.log(favoritesArr);
 }
 
 function displayFavorites() {
   event.preventDefault();
   $("#image-area").empty();
-  console.log(favoritesArr.length)
+  console.log(favoritesArr.length);
   for (let i = 0; i < favoritesArr.length; i++) {
-      console.log(favoritesArr[i])
-    $("#image-area").append("<div class=image-box><img src=" + favoritesArr[i] + ">");
+    console.log(favoritesArr[i]);
+    $("#image-area").append(
+      "<div class=image-box><img src=" + favoritesArr[i] + ">"
+    );
   }
 }
 
