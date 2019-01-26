@@ -1,5 +1,5 @@
-buttonArr = ["OMG", "Good Morning", "LOL", "NO", "Ok", "Good"]; //Initial sample search values
-favoritesArr = [];
+let buttonArr = ["OMG", "Good Morning", "LOL", "NO", "Ok", "Good"]; //Initial sample search values
+let favoritesArr = [];
 loadButtons();
 //Creates and displays buttons for all in array
 function loadButtons() {
@@ -44,7 +44,6 @@ function giphyPull(response) {
   $("#user-input").val(""); //Clears user search bar
   for (let i = 0; i < response.data.length; i++) {
     console.log(response.data[i]);
-    let image = $();
     $("#image-area").append(
       "<div class=image-box><img src =" +
       response.data[i].images.original_still.url +
@@ -99,14 +98,23 @@ function still() {
     .css("visibility", "hidden");
 }
 
+function buttonAnimate(){
+    console.log($(this).effect( "shake", {times:4}, 1000 ));
+}
+
 function saveFavorite(event) {
+//Make it so that you can't save the same favorite twice
   event.preventDefault();
   favoritesArr.push(
     $(this)
       .siblings(".gif")
       .attr("src")
   );
-  $(this).siblings('.fave-icon').animate({fontSize: "100px"},500, "easeInOutBounce").animate({fontSize: "0px"},500, "easeOutBounce");
+    //Heart beat animation on save of favorite
+  $(this)
+    .siblings(".fave-icon")
+    .animate({ fontSize: "100px" }, 500, "easeInOutBounce")
+    .animate({ fontSize: "0px" }, 500, "easeOutBounce");
   console.log(favoritesArr);
 }
 
@@ -126,6 +134,7 @@ function displayFavorites() {
 $("#search-btn").click(performSearch);
 $("#favorite-btn").click(displayFavorites);
 $(document).on("click", ".button", () => performCall(event.target.innerText));
+$(document).on("click", ".button", buttonAnimate);
 $(document).on("click", "#favorite", saveFavorite);
 $(document).on("mouseenter", ".image-box", move);
 $(document).on("mouseleave", ".image-box", still);
