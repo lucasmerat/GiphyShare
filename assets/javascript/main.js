@@ -135,17 +135,17 @@ function removeFavorite() {
 function displayFavorites() {
   event.preventDefault();
   $("#image-area").empty();
-  console.log(favoritesArr.length);
   for (let i = 0; i < favoritesArr.length; i++) {
     console.log(favoritesArr[i]);
-    $("#image-area").append(
-      "<div class=image-box><img src=" + favoritesArr[i] + "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" + //Link to share on Facebook
+    $("#image-area").prepend(
+      "<div class=image-box><img src=" + favoritesArr[i] + " class=gif><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" + //Link to share on Facebook
       favoritesArr[i] +
       "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" +//Link to share on Twitter
       favoritesArr[i] +
       "'><a id=removefave class=social data-fave=" + i + " href='#'>Remove Favorite</a><i class='fas fa-heart fave-icon'>"//Link to favorite item
     );
   }
+  $("#image-area").prepend("<div class=subtitle-box><h3 class=subtitle>Favorites</h1>")
 }
 
 //Event listeners

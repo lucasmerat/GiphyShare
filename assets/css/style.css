@@ -31,17 +31,19 @@ font-size: 4em;
   padding:15px 15px 19px 15px;
 }
 
-#title-1 {
-  color: white;
-  font-family: "Helvetica Neue", helvetica, sans-serif;
-  font-weight: bolder;
+.subtitle {
+    text-align: center;
+    font-size: 2em;
+    border-bottom: 4px solid white;
+    width: 150px;
+    margin: 0 auto;
+    padding-bottom: 10px;
 }
 
-#title-2 {
-  color: white;
-  font-family: "Helvetica Neue", helvetica, sans-serif;
-  font-weight: bolder;
+.subtitle-box {
+    width:100%;
 }
+
 
 #search-area {
   text-align: center;
@@ -238,5 +240,10 @@ font-size: 4em;
   form , #description{
     margin-left: 10px;
     margin-right: 10px;
+  }
+
+  .gif {
+    max-width: 350px;
+    min-width: 50px;
   }
 }
