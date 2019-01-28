@@ -53,15 +53,16 @@ function performCall(value) {
   }
   loadButtons(); //Reloads buttons to display all values including new one added
   console.log(firstCall);
-  //If the call to API was made by a button click, change first call value to true, making it reset values on next query
-  if(event.target.className === 'button'){
-    firstCall = true;
-    }
+  //If the call to API was made by a button click, 
+  if (event.target.className === "button") {
+    firstCall = true;//change first call value to true, making it reset values on next query
+    gifInitial = 10;//Restart search query at beggining of array
+  }
   if (firstCall === true) {
     //If on first search, run initial giphy pull function
     $.ajax({ url: queryUrl, method: "GET" }).then(giphyPullInitial); //AJAX call takes giphyPull function as callback
     firstCall = true;
-} else {
+  } else {
     //Otherwise, run function to load additional gifs
     $.ajax({ url: queryUrl, method: "GET" }).then(giphyPullAdditional); //AJAX call takes giphyPull function as callback
   }
