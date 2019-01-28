@@ -65,6 +65,7 @@ function giphyPull(response) {
         "'><a id=favorite class=social href='www.lucas.com'></a><i class='fas fa-heart fave-icon'>"//Link to favorite item
     );
   }
+  $('.footer').css('bottom','auto')
 }
 //Changes gif to animated, called by hovering over image w mouseenter event
 function move() {

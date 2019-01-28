@@ -203,27 +203,14 @@ font-size: 4em;
     display:inline;
 }
 
-/* Fade in animation
-
-<i class="fas fa-heart"></i>
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+.footer{
+    margin-top:20px;
+    height:40px;
+    position:absolute;
+    bottom:0px;
+    width:100%;
+    text-align: center;
 }
-
-.fadeInDown {
-  animation-name: fadeInDown;
-}
-
-*/
 
 
 
