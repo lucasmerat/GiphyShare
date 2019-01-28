@@ -147,7 +147,9 @@ font-size: 4em;
     min-width:200px;
 }
 
-.social {
+
+
+.social, .load-more {
     color:white !important;
     text-decoration:none !important;
     font-size: 18px;
@@ -160,6 +162,20 @@ font-size: 4em;
     padding: 5px;
     text-align:center;
 }
+
+.load-more{
+    visibility:visible;
+    position:relative;
+    display:block;
+    cursor:pointer;
+    margin:0 auto;
+}
+
+.load-more-box{
+    width:100%;
+    text-align: center;
+}
+
 
 .social:hover, .social:visited, .social:active{
     color:white;
