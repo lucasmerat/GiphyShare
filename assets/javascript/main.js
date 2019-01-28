@@ -1,5 +1,8 @@
 let buttonArr = ["OMG", "Good Morning", "LOL", "NO", "Ok", "Good"]; //Initial sample search values
-let favoritesArr = [];
+let favoritesArr = JSON.parse(localStorage.getItem('savedImages'))
+if(!Array.isArray(favoritesArr)){
+    favoritesArr = [];
+}
 loadButtons();
 //Creates and displays buttons for all in array
 function loadButtons() {
@@ -110,6 +113,7 @@ function saveFavorite(event) {
       .siblings(".gif")
       .attr("src")
   );
+   localStorage.setItem('savedImages',JSON.stringify(favoritesArr));
     //Heart beat animation on save of favorite
   $(this)
     .siblings(".fave-icon")
