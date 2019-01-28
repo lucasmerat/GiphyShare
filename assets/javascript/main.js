@@ -1,10 +1,9 @@
-//TODO: Make it so I can continue to increase gif limit on each click. Make it so clicking button stores value for additional gif button click. Use gif limit varibale in initial call?, make it more functional. Need to reduce repetition here
+//TODO: Make it more functional. Need to reduce repetition here. Specifically with using initial and additional giphy calls. Also, defining buttonClicked value to global scope to be used by other variables. How can I improve this?
 
-let firstCall = true;
-let gifLimit = 20;
-//Setting array of buttons to be array saved in local storage
-let buttonArr = JSON.parse(localStorage.getItem("savedButtons"));
-//Setting default buttons when array is empty
+let firstCall = true; //Boolean to track that user is on initial search
+let gifInitial = 10; //Initial gif value of 10 for loops
+
+let buttonArr = JSON.parse(localStorage.getItem("savedButtons")); //Setting array of buttons to be array saved in local storage
 if (!Array.isArray(buttonArr)) {
   buttonArr = ["OMG", "Goodmorning!", "LOL", "OK", "WTF"];
 }
@@ -27,7 +26,8 @@ function loadButtons() {
 //If search bar is filled, calls the performCall function w argument of the user's search
 function performSearch(event) {
   event.preventDefault();
-  firstCall = true;
+  firstCall = true; //Resets first call to true to perform initial search
+  gifInitial = 10; //Resets initial value to start of array for new search
   if ($("#user-input").val() === "") {
     alert("Enter a search to find giphys!");
   } else {
@@ -38,6 +38,7 @@ function performSearch(event) {
 function performCall(value) {
   let query = value;
   console.log(query);
+  buttonClicked = event.target.innerText; //Creating button clicked text variable gloabally to be used in giphy pull functions
   let queryUrl =
     "https://api.giphy.com/v1/gifs/search?api_key=VXGe08mkPRvKJZQIFGMHmx9xiIhGYg7t&q=" +
     query +
@@ -51,21 +52,24 @@ function performCall(value) {
     localStorage.setItem("savedButtons", JSON.stringify(buttonArr)); //Saves new list of buttons to local storage
   }
   loadButtons(); //Reloads buttons to display all values including new one added
-  console.log(firstCall)
-  if(firstCall === true){
-  $.ajax({ url: queryUrl, method: "GET" }).then(giphyPullInitial); //AJAX call takes giphyPull function as callback
-    }else{
-  $.ajax({ url: queryUrl, method: "GET" }).then(giphyPullAdditional); //AJAX call takes giphyPull function as callback
+  console.log(firstCall);
+  if (firstCall === true) {
+    //If on first search, run initial giphy pull function
+    $.ajax({ url: queryUrl, method: "GET" }).then(giphyPullInitial); //AJAX call takes giphyPull function as callback
+  } else {
+    //Otherwise, run function to load additional gifs
+    $.ajax({ url: queryUrl, method: "GET" }).then(giphyPullAdditional); //AJAX call takes giphyPull function as callback
   }
 }
-//Takes image data from Giphy API and uses it to display images on page
+//Function to display gifs from API on page
 function giphyPullInitial(response) {
   console.log(response); //Display JSON
   $("#image-area").empty(); //Clear all images, each query
-  //Adds button to load more images
+  //Adds button to load more images at bottom
   $("#image-area").append(
     "<div class=load-more-box><a class=load-more data-load='" +
-      $("#user-input").val() + //saving data attribute with user query
+    $("#user-input").val() +
+    buttonClicked + //saving data attribute with user query and value of button click
       "'>Load 10 more</a>"
   );
   $("#user-input").val(""); //Clears user search bar
@@ -84,35 +88,33 @@ function giphyPullInitial(response) {
         "'><a id=favorite class=social href='www.lucas.com'></a><i class='fas fa-heart fave-icon'>" //Link to favorite item
     );
   }
-  $(".footer").css("bottom", "auto");
-  firstCall = false;
+  firstCall = false; //Setting boolean to run additional gif function if button is clicked
+  gifInitial += 10; //Increase initial gif value to show images farther in array on next call
+  $(".footer").css("bottom", "auto"); //Sticking footer to bottom
 }
-//HOW CAN I NOT REPEATE HERE
+//Pulls more gifs to bottom of page - How could I reuse the initial function above??
 function giphyPullAdditional(response) {
-    console.log(response)
-    console.log(gifLimit)
-    for (let i = 10; i < gifLimit; i++) {
+  console.log("Performing additional pull of images");
+  console.log(gifInitial);
+  for (let i = gifInitial - 10; i < gifInitial; i++) {
+    //Loop starts at 10, which increments every time you load gifs
     $("#image-area").append(
-        "<div class=image-box><img src =" +
+      //Adding gifs to page with
+      "<div class=image-box><img src =" +
         response.data[i].images.original_still.url +
         " class=gif animated=" +
-        response.data[i].images.original.url + //Adding animated image as arg
-        " still=" +
-        response.data[i].images.original_still.url + //Still image as second arg to revert off hover
-        "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" + //Link to share on Facebook
         response.data[i].images.original.url +
-        "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" + //Link to share on Twitter
-          response.data[i].bitly_url +
-          "'><a id=favorite class=social href='www.lucas.com'></a><i class='fas fa-heart fave-icon'>" //Link to favorite item
-      );
-    }
-    $(".load-more-box").remove()
-    $("#image-area").append(
-        "<div class=load-more-box><a class=load-more data-load='" +
-          $("#user-input").val() + //saving data attribute with user query
-          "'>Load 10 more</a>"
-      );
-    gifLimit += 10;
+        " still=" +
+        response.data[i].images.original_still.url +
+        "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" +
+        response.data[i].images.original.url +
+        "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" +
+        response.data[i].bitly_url +
+        "'><a id=favorite class=social href='www.lucas.com'></a><i class='fas fa-heart fave-icon'>"
+    );
+  }
+  $(".load-more-box").appendTo("#image-area"); //Move the additional gif to end of page
+  gifInitial += 10; //Increase the gif initial value by 10
 }
 
 //Changes gif to animated, called by hovering over image w mouseenter event
@@ -169,14 +171,14 @@ function saveFavorite(event) {
     .animate({ fontSize: "100px" }, 500, "easeInOutBounce")
     .animate({ fontSize: "0px" }, 500, "easeOutBounce");
 }
-
+//Deletes favorite from array - triggered by clicking remove favorite button
 function removeFavorite() {
   let favoriteNumber = $(this).attr("data-fave");
   favoritesArr.splice(favoriteNumber, 1);
   displayFavorites();
   localStorage.setItem("savedImages", JSON.stringify(favoritesArr));
 }
-
+//Displays favorite gifs on page - data pulled stored values in favorites array/Local Storage rather than API
 function displayFavorites() {
   event.preventDefault();
   $("#image-area").empty();
@@ -184,10 +186,10 @@ function displayFavorites() {
     console.log(favoritesArr[i]);
     $("#image-area").prepend(
       "<div class=image-box><img src=" +
-      favoritesArr[i] +
-      " class=gif><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" + //Link to share on Facebook
-      favoritesArr[i] +
-      "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" + //Link to share on Twitter
+        favoritesArr[i] +
+        " class=gif><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" +
+        favoritesArr[i] +
+        "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" +
         favoritesArr[i] +
         "'><a id=removefave class=social data-fave=" +
         i +
@@ -195,6 +197,7 @@ function displayFavorites() {
     );
   }
   $("#image-area").prepend(
+    //Display favorites title at start of div
     "<div class=subtitle-box><h3 class=subtitle>Favorites</h1>"
   );
 }
@@ -205,6 +208,8 @@ $("#favorite-btn").click(displayFavorites);
 $(document).on("click", ".button", () => performCall(event.target.innerText));
 $(document).on("click", "#favorite", saveFavorite);
 $(document).on("click", "#removefave", removeFavorite);
-$(document).on("click", ".load-more", () => performCall($('.load-more').attr('data-load')));
+$(document).on("click", ".load-more", () =>
+  performCall($(".load-more").attr("data-load"))
+); //Performs a call, passing in search query saved in data-load attr as argument
 $(document).on("mouseenter", ".image-box", move);
 $(document).on("mouseleave", ".image-box", still);
