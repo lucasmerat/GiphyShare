@@ -87,7 +87,8 @@ font-size: 4em;
   height: auto;
   margin: 0 auto;
   margin-bottom: 20px;
-  background-color: orange;
+  background-color: none;
+  text-align:center;
 }
 
 
@@ -135,7 +136,7 @@ font-size: 4em;
 }
 
 .image-box:hover > img {
-  opacity:.5
+  opacity:.8;
 }
 
 .gif {

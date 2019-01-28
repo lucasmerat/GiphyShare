@@ -1,4 +1,7 @@
-let buttonArr = ["OMG", "Good Morning", "LOL", "NO", "Ok", "Good"]; //Initial sample search values
+let buttonArr = JSON.parse(localStorage.getItem('savedButtons')); //Initial sample search values
+if(!Array.isArray(buttonArr)){
+    buttonArr = ['OMG','Goodmorning!','LOL','OK','WTF'];
+}
 let favoritesArr = JSON.parse(localStorage.getItem('savedImages'))
 if(!Array.isArray(favoritesArr)){
     favoritesArr = [];
@@ -36,6 +39,7 @@ function performCall(value) {
     console.log(query + " is already in the array");
   } else {
     buttonArr.push(query);
+    localStorage.setItem('savedButtons',JSON.stringify(buttonArr))//Saves new list of buttons to local storage
   }
   loadButtons(); //Reloads buttons to display all values including new one added
   $.ajax({ url: queryUrl, method: "GET" }).then(giphyPull); //AJAX call takes giphyPull function as callback
