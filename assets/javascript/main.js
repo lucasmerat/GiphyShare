@@ -38,7 +38,7 @@ function performSearch(event) {
 function performCall(value) {
   let query = value;
   console.log(query);
-  buttonClicked = event.target.innerText; //Creating button clicked text variable gloabally to be used in giphy pull functions
+  buttonClicked = value; //Creating button clicked text variable gloabally to be used in giphy pull functions
   let queryUrl =
     "https://api.giphy.com/v1/gifs/search?api_key=VXGe08mkPRvKJZQIFGMHmx9xiIhGYg7t&q=" +
     query +
@@ -53,10 +53,15 @@ function performCall(value) {
   }
   loadButtons(); //Reloads buttons to display all values including new one added
   console.log(firstCall);
+  //If the call to API was made by a button click, change first call value to true, making it reset values on next query
+  if(event.target.className === 'button'){
+    firstCall = true;
+    }
   if (firstCall === true) {
     //If on first search, run initial giphy pull function
     $.ajax({ url: queryUrl, method: "GET" }).then(giphyPullInitial); //AJAX call takes giphyPull function as callback
-  } else {
+    firstCall = true;
+} else {
     //Otherwise, run function to load additional gifs
     $.ajax({ url: queryUrl, method: "GET" }).then(giphyPullAdditional); //AJAX call takes giphyPull function as callback
   }
