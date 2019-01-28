@@ -58,11 +58,11 @@ function giphyPull(response) {
       response.data[i].images.original.url + //Adding animated image as arg
       " still=" +
       response.data[i].images.original_still.url + //Still image as second arg to revert off hover
-      "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" + //Adding link to share on Facebook
+      "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" + //Link to share on Facebook
         response.data[i].images.original.url +
-        "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" +
+        "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" +//Link to share on Twitter
         response.data[i].bitly_url +
-        "'><a id=favorite class=social href='www.lucas.com'></a><i class='fas fa-heart fave-icon'>"
+        "'><a id=favorite class=social href='www.lucas.com'></a><i class='fas fa-heart fave-icon'>"//Link to favorite item
     );
   }
 }
@@ -123,7 +123,13 @@ function saveFavorite(event) {
     .siblings(".fave-icon")
     .animate({ fontSize: "100px" }, 500, "easeInOutBounce")
     .animate({ fontSize: "0px" }, 500, "easeOutBounce");
-  console.log(favoritesArr);
+}
+
+function removeFavorite() {
+   let favoriteNumber = $(this).attr('data-fave')
+   favoritesArr.splice(favoriteNumber,1)
+   displayFavorites()
+   localStorage.setItem("savedImages", JSON.stringify(favoritesArr));
 }
 
 function displayFavorites() {
@@ -133,7 +139,11 @@ function displayFavorites() {
   for (let i = 0; i < favoritesArr.length; i++) {
     console.log(favoritesArr[i]);
     $("#image-area").append(
-      "<div class=image-box><img src=" + favoritesArr[i] + ">"
+      "<div class=image-box><img src=" + favoritesArr[i] + "><a id=facebook class=social target=_blank href='https://www.facebook.com/sharer/sharer.php?u=" + //Link to share on Facebook
+      favoritesArr[i] +
+      "&amp;src=sdkpreparse'><a id=twitter class=social target=_blank href='https://twitter.com/intent/tweet?text=" +//Link to share on Twitter
+      favoritesArr[i] +
+      "'><a id=removefave class=social data-fave=" + i + " href='#'>Remove Favorite</a><i class='fas fa-heart fave-icon'>"//Link to favorite item
     );
   }
 }
@@ -144,5 +154,6 @@ $("#favorite-btn").click(displayFavorites);
 $(document).on("click", ".button", () => performCall(event.target.innerText));
 $(document).on("click", ".button", buttonAnimate);
 $(document).on("click", "#favorite", saveFavorite);
+$(document).on("click", "#removefave", removeFavorite);
 $(document).on("mouseenter", ".image-box", move);
 $(document).on("mouseleave", ".image-box", still);
